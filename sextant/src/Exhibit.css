@@ -1,15 +1,17 @@
 .card {
     background-color: #1d2129;
-    width:40%;
+    width:min-content;
+    box-sizing: border-box;
     height:inherit;
-    margin:30px;
+    margin:10px;
     float: left;
     border-radius: 2px;
 }
 
-.card h3{   /* This just styles the test children (will change later)*/
-    color:white;
-    padding:10px;
+.card span { /*Should be used to style any children*/
+    color: white;
+    display: inline-block;
+    padding: 10px 20px;
 }
 
 .cardTitle {

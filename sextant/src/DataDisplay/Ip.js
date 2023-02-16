@@ -2,8 +2,8 @@ import React from "react";
 
 export const IPV4 = 0;
 export const IPV6 = 1;
-const IPV4_api = "https://api4.ipify.org?format=json";
-const IPV6_api = "https://api6.ipify.org?format=json";
+const IPV4_api = "https://api.ipify.org?format=json";
+const IPV6_api = "https://api64.ipify.org?format=json";
 
 export default class Ip extends React.Component {
     constructor(props) {
@@ -14,8 +14,8 @@ export default class Ip extends React.Component {
             api: IPV4_api,
             ip: '0.0.0.0'
         };
-        if(props.ipv == IPV4){this.setState({api: IPV4_api})}
-        if(props.ipv == IPV6){this.setState({api: IPV6_api})}
+        if(props.ipv === IPV4){this.setState({api: IPV4_api})}
+        if(props.ipv === IPV6){this.setState({api: IPV6_api})}
     }
 
     componentDidMount() {
@@ -33,18 +33,18 @@ export default class Ip extends React.Component {
                         error
                     });
                 }
-            )
+            );
     }
 
     render() {
-        const { error, isLoaded, ip } = this.state;
+        const { error, isLoaded, ip} = this.state;
         if (error) {
             return <h3>Could not connect</h3>; //hiding true error for security otherwise {error.message}
         } else if (!isLoaded) {
             return <h3>Loading...</h3>;
         } else {
             return (
-                <h3>{this.state.ip}</h3>
+                <h3>{ip}</h3>
             );
         }
     }
