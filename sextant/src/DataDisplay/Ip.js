@@ -12,6 +12,7 @@ export default class Ip extends React.Component {
             error: null,
             isLoaded: false,
             api: IPV4_api,
+            ipv: props.ipv,
             ip: '0.0.0.0'
         };
         if(props.ipv === IPV4){this.setState({api: IPV4_api})}
@@ -23,9 +24,17 @@ export default class Ip extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    let ipValue = "Not Provided"; //in the case of not having the specific type of address
+                    let apiIP = result.ip;
+                    if(this.state.ipv === IPV4 && apiIP.includes('.')){   //add a check for address format as the API will return whichever you have
+                        ipValue = apiIP;
+                    }
+                    if(this.state.ipv === IPV6 && apiIP.includes(':')){    //simple checking method but it will work
+                        ipValue = apiIP;
+                    }
                     this.setState({
                         isLoaded: true,
-                        ip: result.ip
+                        ip: ipValue
                     });
                 }, (error) => {
                     this.setState({
